@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBsConfigTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListBsConfigEmpty}" rendered="#{bsConfigController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{bsConfigController.items.rowCount > 0}">
+                    <h:outputText value="#{bsConfigController.pagination.pageFirstItem + 1}..#{bsConfigController.pagination.pageLastItem + 1}/#{bsConfigController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{bsConfigController.previous}" value="#{bundle.Previous} #{bsConfigController.pagination.pageSize}" rendered="#{bsConfigController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{bsConfigController.next}" value="#{bundle.Next} #{bsConfigController.pagination.pageSize}" rendered="#{bsConfigController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{bsConfigController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsConfigTitle_configName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.configName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsConfigTitle_configValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.configValue}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsConfigTitle_configNullable}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.configNullable}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsConfigTitle_configType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.configType}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{bsConfigController.prepareView}" value="#{bundle.ListBsConfigViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{bsConfigController.prepareEdit}" value="#{bundle.ListBsConfigEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{bsConfigController.destroy}" value="#{bundle.ListBsConfigDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{bsConfigController.prepareCreate}" value="#{bundle.ListBsConfigCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListBsConfigIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

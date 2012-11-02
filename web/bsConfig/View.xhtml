@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBsConfigTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewBsConfigLabel_configName}"/>
+                    <h:outputText value="#{bsConfigController.selected.configName}" title="#{bundle.ViewBsConfigTitle_configName}"/>
+                    <h:outputText value="#{bundle.ViewBsConfigLabel_configValue}"/>
+                    <h:outputText value="#{bsConfigController.selected.configValue}" title="#{bundle.ViewBsConfigTitle_configValue}"/>
+                    <h:outputText value="#{bundle.ViewBsConfigLabel_configNullable}"/>
+                    <h:outputText value="#{bsConfigController.selected.configNullable}" title="#{bundle.ViewBsConfigTitle_configNullable}"/>
+                    <h:outputText value="#{bundle.ViewBsConfigLabel_configType}"/>
+                    <h:outputText value="#{bsConfigController.selected.configType}" title="#{bundle.ViewBsConfigTitle_configType}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{bsConfigController.destroyAndView}" value="#{bundle.ViewBsConfigDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewBsConfigEditLink}"/>
+                <br />
+                <h:commandLink action="#{bsConfigController.prepareCreate}" value="#{bundle.ViewBsConfigCreateLink}" />
+                <br />
+                <h:commandLink action="#{bsConfigController.prepareList}" value="#{bundle.ViewBsConfigShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewBsConfigIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

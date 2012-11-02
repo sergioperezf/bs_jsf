@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBsPostTitle} of all posts"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListBsPostEmpty}" rendered="#{bsPostController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{bsPostController.items.rowCount > 0}">
+                    <h:outputText value="#{bsPostController.pagination.pageFirstItem + 1}..#{bsPostController.pagination.pageLastItem + 1}/#{bsPostController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{bsPostController.previous}" value="#{bundle.Previous} #{bsPostController.pagination.pageSize}" rendered="#{bsPostController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{bsPostController.next}" value="#{bundle.Next} #{bsPostController.pagination.pageSize}" rendered="#{bsPostController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{bsPostController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_postId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.postId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_postTitle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.postTitle}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_postBody}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.postBody}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_postPublished}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.postPublished}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_postAlias}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.postAlias}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBsPostTitle_bsUserId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bsUserId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{bsPostController.prepareView}" value="#{bundle.ListBsPostViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{bsPostController.prepareEdit}" value="#{bundle.ListBsPostEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{bsPostController.destroy}" value="#{bundle.ListBsPostDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <ul>
+                    <ui:repeat value="#{bsPostController.items}" var="item">
+                        <li class="post">
+                            <h2 class="postTitle"><h:outputText value="#{item.postTitle}"/></h2>
+                            <div class="postHeader">
+                                <div class="postAuthor"><h:outputText value="#{item.bsUserId.userName}"/></div>
+                                <div class="postPublished"><h:outputText value="#{item.postPublishedFullDate}"/></div>
+                            </div>
+                            <div class="postContent"><h:outputText value="#{item.postBody}" escape="false"/></div>
+                            <div class="postFooter">
+                                <div class="postNumberOfComments"></div>
+                                <h:commandLink action="#{bsPostController.prepareView}" value="#{bundle.ListBsPostViewLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{bsPostController.prepareEdit}" value="#{bundle.ListBsPostEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{bsPostController.destroy}" value="#{bundle.ListBsPostDestroyLink}"/>
+                            </div>
+                        </li>
+                    </ui:repeat>
+                </ul>
+                <br />
+                <h:commandLink action="#{bsPostController.prepareCreate}" value="#{bundle.ListBsPostCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListBsPostIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

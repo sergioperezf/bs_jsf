@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateBsUserTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateBsUserLabel_userId}" for="userId" />
+                    <h:inputText id="userId" value="#{bsUserController.selected.userId}" title="#{bundle.CreateBsUserTitle_userId}" required="true" requiredMessage="#{bundle.CreateBsUserRequiredMessage_userId}"/>
+                    <h:outputLabel value="#{bundle.CreateBsUserLabel_userName}" for="userName" />
+                    <h:inputText id="userName" value="#{bsUserController.selected.userName}" title="#{bundle.CreateBsUserTitle_userName}" required="true" requiredMessage="#{bundle.CreateBsUserRequiredMessage_userName}"/>
+                    <h:outputLabel value="#{bundle.CreateBsUserLabel_userPassword}" for="userPassword" />
+                    <h:inputText id="userPassword" value="#{bsUserController.selected.userPassword}" title="#{bundle.CreateBsUserTitle_userPassword}" required="true" requiredMessage="#{bundle.CreateBsUserRequiredMessage_userPassword}"/>
+                    <h:outputLabel value="#{bundle.CreateBsUserLabel_userSince}" for="userSince" />
+                    <h:inputText id="userSince" value="#{bsUserController.selected.userSince}" title="#{bundle.CreateBsUserTitle_userSince}" required="true" requiredMessage="#{bundle.CreateBsUserRequiredMessage_userSince}"/>
+                    <h:outputLabel value="#{bundle.CreateBsUserLabel_userInfo}" for="userInfo" />
+                    <h:inputTextarea rows="4" cols="30" id="userInfo" value="#{bsUserController.selected.userInfo}" title="#{bundle.CreateBsUserTitle_userInfo}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{bsUserController.create}" value="#{bundle.CreateBsUserSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{bsUserController.prepareList}" value="#{bundle.CreateBsUserShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateBsUserIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

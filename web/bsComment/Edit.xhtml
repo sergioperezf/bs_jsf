@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBsCommentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentId}" for="commentId" />
+                    <h:inputText id="commentId" value="#{bsCommentController.selected.commentId}" title="#{bundle.EditBsCommentTitle_commentId}" required="true" requiredMessage="#{bundle.EditBsCommentRequiredMessage_commentId}"/>
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentBody}" for="commentBody" />
+                    <h:inputTextarea rows="4" cols="30" id="commentBody" value="#{bsCommentController.selected.commentBody}" title="#{bundle.EditBsCommentTitle_commentBody}" required="true" requiredMessage="#{bundle.EditBsCommentRequiredMessage_commentBody}"/>
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentUsername}" for="commentUsername" />
+                    <h:inputText id="commentUsername" value="#{bsCommentController.selected.commentUsername}" title="#{bundle.EditBsCommentTitle_commentUsername}" />
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentUseremail}" for="commentUseremail" />
+                    <h:inputText id="commentUseremail" value="#{bsCommentController.selected.commentUseremail}" title="#{bundle.EditBsCommentTitle_commentUseremail}" />
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentUsersite}" for="commentUsersite" />
+                    <h:inputText id="commentUsersite" value="#{bsCommentController.selected.commentUsersite}" title="#{bundle.EditBsCommentTitle_commentUsersite}" />
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_commentPublished}" for="commentPublished" />
+                    <h:inputText id="commentPublished" value="#{bsCommentController.selected.commentPublished}" title="#{bundle.EditBsCommentTitle_commentPublished}" required="true" requiredMessage="#{bundle.EditBsCommentRequiredMessage_commentPublished}"/>
+                    <h:outputLabel value="#{bundle.EditBsCommentLabel_bsUserId}" for="bsUserId" />
+                    <h:selectOneMenu id="bsUserId" value="#{bsCommentController.selected.bsUserId}" title="#{bundle.EditBsCommentTitle_bsUserId}" >
+                        <f:selectItems value="#{bsUserController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{bsCommentController.update}" value="#{bundle.EditBsCommentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditBsCommentViewLink}"/>
+                <br />
+                <h:commandLink action="#{bsCommentController.prepareList}" value="#{bundle.EditBsCommentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditBsCommentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

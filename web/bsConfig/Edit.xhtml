@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBsConfigTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBsConfigLabel_configName}" for="configName" />
+                    <h:inputText id="configName" value="#{bsConfigController.selected.configName}" title="#{bundle.EditBsConfigTitle_configName}" required="true" requiredMessage="#{bundle.EditBsConfigRequiredMessage_configName}"/>
+                    <h:outputLabel value="#{bundle.EditBsConfigLabel_configValue}" for="configValue" />
+                    <h:inputText id="configValue" value="#{bsConfigController.selected.configValue}" title="#{bundle.EditBsConfigTitle_configValue}" />
+                    <h:outputLabel value="#{bundle.EditBsConfigLabel_configNullable}" for="configNullable" />
+                    <h:inputText id="configNullable" value="#{bsConfigController.selected.configNullable}" title="#{bundle.EditBsConfigTitle_configNullable}" required="true" requiredMessage="#{bundle.EditBsConfigRequiredMessage_configNullable}"/>
+                    <h:outputLabel value="#{bundle.EditBsConfigLabel_configType}" for="configType" />
+                    <h:inputText id="configType" value="#{bsConfigController.selected.configType}" title="#{bundle.EditBsConfigTitle_configType}" required="true" requiredMessage="#{bundle.EditBsConfigRequiredMessage_configType}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{bsConfigController.update}" value="#{bundle.EditBsConfigSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditBsConfigViewLink}"/>
+                <br />
+                <h:commandLink action="#{bsConfigController.prepareList}" value="#{bundle.EditBsConfigShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditBsConfigIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
